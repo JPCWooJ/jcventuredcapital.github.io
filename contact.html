@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — JC Venture Capital</title>
+  <meta name="description" content="Connect with JC Venture Capital — whether you are a founder seeking an investor with institutional rigor, or a sophisticated co-investor seeking curated deal flow alongside a 30-year investment professional." />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+
+    /* ── CONTACT-SPECIFIC STYLES ── */
+
+    /* Pathway cards */
+    .pathways-section { background: var(--cream); }
+
+    .pathways-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-bottom: 72px;
+    }
+
+    .pathway-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 48px 40px;
+      box-shadow: var(--shadow-sm);
+      border-top: 4px solid var(--gold);
+      transition: box-shadow var(--transition), transform var(--transition);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pathway-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: var(--navy);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 0;
+    }
+
+    .pathway-card.active {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-4px);
+    }
+
+    .pathway-card.active::before { opacity: 1; }
+
+    .pathway-card > * { position: relative; z-index: 1; }
+
+    .pathway-icon {
+      width: 64px;
+      height: 64px;
+      background: rgba(26,42,74,0.06);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      margin-bottom: 24px;
+      transition: background var(--transition);
+    }
+
+    .pathway-card.active .pathway-icon {
+      background: rgba(197,162,77,0.15);
+    }
+
+    .pathway-card h3 {
+      font-size: 1.4rem;
+      color: var(--navy);
+      margin-bottom: 16px;
+      transition: color var(--transition);
+    }
+
+    .pathway-card.active h3 { color: var(--white); }
+
+    .pathway-card p {
+      font-size: 0.93rem;
+      color: var(--text-mid);
+      line-height: 1.75;
+      transition: color var(--transition);
+    }
+
+    .pathway-card.active p { color: rgba(255,255,255,0.65); }
+
+    .pathway-select-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-top: 24px;
+      transition: gap var(--transition);
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      padding: 0;
+    }
+
+    .pathway-select-btn:hover { gap: 12px; }
+
+    .pathway-card.active .pathway-select-btn {
+      color: var(--gold);
+    }
+
+    /* Contact form */
+    .contact-form-section { background: var(--white); padding: 80px 0; }
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .contact-sidebar {}
+
+    .contact-sidebar h3 {
+      font-size: 1.6rem;
+      margin-bottom: 8px;
+    }
+
+    .contact-sidebar-sub {
+      font-size: 0.88rem;
+      color: var(--text-light);
+      margin-bottom: 40px;
+    }
+
+    .contact-detail {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .contact-detail:last-of-type { border-bottom: none; }
+
+    .contact-detail-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .contact-detail-value {
+      font-size: 0.92rem;
+      color: var(--text-dark);
+      font-weight: 500;
+    }
+
+    .contact-detail-value a {
+      color: var(--navy);
+      transition: color var(--transition);
+    }
+
+    .contact-detail-value a:hover { color: var(--gold); }
+
+    .response-promise {
+      background: var(--cream);
+      border-left: 3px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 20px 24px;
+      margin-top: 32px;
+    }
+
+    .response-promise p {
+      font-size: 0.85rem;
+      color: var(--text-mid);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* Form styling */
+    .contact-form {
+      background: var(--cream);
+      border-radius: var(--radius);
+      padding: 48px;
+    }
+
+    .contact-form-header {
+      margin-bottom: 36px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .contact-form-header h4 {
+      font-size: 1.5rem;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+
+    .contact-form-header p { font-size: 0.88rem; color: var(--text-light); margin: 0; }
+
+    .form-row { margin-bottom: 20px; }
+
+    .form-row-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .form-row label {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    .form-row label .req { color: var(--gold); }
+
+    .form-row input,
+    .form-row select,
+    .form-row textarea {
+      width: 100%;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      color: var(--text-dark);
+      outline: none;
+      transition: border-color var(--transition), box-shadow var(--transition);
+      appearance: none;
+    }
+
+    .form-row input::placeholder,
+    .form-row textarea::placeholder { color: rgba(74,74,74,0.4); }
+
+    .form-row input:focus,
+    .form-row select:focus,
+    .form-row textarea:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(197,162,77,0.1);
+    }
+
+    .select-wrapper { position: relative; }
+
+    .select-wrapper::after {
+      content: '▾';
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-light);
+      pointer-events: none;
+      font-size: 0.8rem;
+    }
+
+    .form-row textarea { resize: vertical; min-height: 140px; }
+
+    .form-row select option { color: var(--text-dark); }
+
+    .form-disclaimer {
+      font-size: 0.78rem;
+      color: var(--text-light);
+      line-height: 1.6;
+      margin-bottom: 24px;
+      font-style: italic;
+    }
+
+    .form-submit-btn {
+      width: 100%;
+      justify-content: center;
+      font-size: 0.85rem;
+      padding: 18px 36px;
+    }
+
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 48px 32px;
+    }
+
+    .form-success-icon {
+      font-size: 3rem;
+      margin-bottom: 16px;
+    }
+
+    .form-success h3 { color: var(--navy); margin-bottom: 12px; }
+    .form-success p { color: var(--text-mid); font-size: 0.95rem; }
+
+    /* What to expect */
+    .expect-section { background: var(--navy); padding: 80px 0; }
+
+    .expect-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-top: 48px;
+    }
+
+    .expect-item {
+      padding: 32px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(197,162,77,0.1);
+      border-radius: var(--radius);
+    }
+
+    .expect-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      font-weight: 500;
+      color: var(--gold);
+      opacity: 0.4;
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+
+    .expect-item h4 { color: var(--white); margin-bottom: 10px; font-size: 1.05rem; }
+    .expect-item p { font-size: 0.88rem; color: rgba(255,255,255,0.5); line-height: 1.65; }
+
+    @media (max-width: 900px) {
+      .pathways-grid { grid-template-columns: 1fr; }
+      .contact-layout { grid-template-columns: 1fr; gap: 48px; }
+      .form-row-split { grid-template-columns: 1fr; gap: 0; }
+      .expect-grid { grid-template-columns: 1fr; gap: 20px; }
+      .contact-form { padding: 32px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════ NAVIGATION ══════ -->
+  <header class="site-header" id="site-header">
+    <div class="container">
+      <nav class="nav-inner">
+        <a href="index.html" class="nav-logo" aria-label="JC Venture Capital Home">
+          <div class="nav-logo-mark"><span>JC</span></div>
+          <div class="nav-logo-text">
+            <span class="nav-logo-name">JC Venture Capital</span>
+            <span class="nav-logo-sub">Miami · Family Office &amp; VC</span>
+          </div>
+        </a>
+        <ul class="nav-links" id="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="insights.html">Insights</a></li>
+          <li><a href="contact.html" class="active nav-cta">Contact Us</a></li>
+        </ul>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+          <span></span><span></span><span></span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ══════ PAGE HERO ══════ -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero-content">
+        <span class="section-label">Let's Connect</span>
+        <h1>Contact Us</h1>
+        <p>We work with two distinct groups of people. Select the pathway that best describes you — and we will make sure your message reaches the right person.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════ PATHWAYS ══════ -->
+  <section class="pathways-section section">
+    <div class="container">
+      <div class="section-header centered fade-in">
+        <span class="section-label">Who Are You?</span>
+        <h2>Two Pathways. One Conversation.</h2>
+        <div class="divider centered"></div>
+        <p>Select the pathway that best describes your situation — this helps us respond with the right context and connect you to the right resources from day one.</p>
+      </div>
+
+      <div class="pathways-grid">
+
+        <div class="pathway-card fade-in active" id="pathway-founder" onclick="selectPathway('founder')">
+          <div class="pathway-icon">🚀</div>
+          <h3>For Founders</h3>
+          <p>
+            If you are building a company in AI, Digital Health, Blockchain, or Real Estate and are
+            seeking an investor with institutional rigor and board-level operational support, we
+            would like to hear from you.
+          </p>
+          <p style="margin-top:16px;">
+            Jeffrey brings 30+ years of institutional investment experience, a track record of
+            helping portfolio companies from seed to scale, and a network that opens doors at every
+            stage of growth.
+          </p>
+          <button class="pathway-select-btn" onclick="selectPathway('founder')">I'm a Founder → Select This Path</button>
+        </div>
+
+        <div class="pathway-card fade-in" id="pathway-coinvestor" onclick="selectPathway('coinvestor')">
+          <div class="pathway-icon">🤝</div>
+          <h3>For Co-Investors &amp; Family Offices</h3>
+          <p>
+            If you are a sophisticated investor seeking access to curated venture and multi-asset
+            deal flow alongside a 30-year investment professional, contact us to learn more about
+            co-investment opportunities.
+          </p>
+          <p style="margin-top:16px;">
+            JCVC offers a community of UHNW families and family offices the ability to co-invest
+            in transactions with institutional diligence already completed — at deal sizes and
+            in sectors where access is typically the barrier.
+          </p>
+          <button class="pathway-select-btn" onclick="selectPathway('coinvestor')">I'm a Co-Investor → Select This Path</button>
+        </div>
+
+      </div>
+
+      <!-- ══ CONTACT LAYOUT ══ -->
+      <div class="contact-layout fade-in">
+
+        <!-- Sidebar -->
+        <div class="contact-sidebar">
+          <h3>Let's Talk</h3>
+          <p class="contact-sidebar-sub">We review every inquiry personally.</p>
+
+          <div class="contact-detail">
+            <span class="contact-detail-label">Email</span>
+            <span class="contact-detail-value">
+              <a href="mailto:jeff@jcventurecap.com">jeff@jcventurecap.com</a>
+            </span>
+          </div>
+          <div class="contact-detail">
+            <span class="contact-detail-label">Location</span>
+            <span class="contact-detail-value">Miami, Florida</span>
+          </div>
+          <div class="contact-detail">
+            <span class="contact-detail-label">LinkedIn</span>
+            <span class="contact-detail-value">
+              <a href="#" id="linkedin-link">JC Venture Capital ↗</a>
+              <span style="font-size:0.75rem; color:var(--text-light); display:block; margin-top:4px;">Link pending from Jeffrey</span>
+            </span>
+          </div>
+          <div class="contact-detail">
+            <span class="contact-detail-label">Response Time</span>
+            <span class="contact-detail-value">Within 2–3 business days</span>
+          </div>
+
+          <div class="response-promise">
+            <p>
+              <strong>Our commitment:</strong> Every message sent through this form is read by Jeffrey
+              or his executive assistant Joanne personally. We do not use automated screening.
+              If your inquiry is a fit, you will hear directly from us.
+            </p>
+          </div>
+        </div>
+
+        <!-- Form -->
+        <div class="contact-form" id="contact-form-wrap">
+          <div class="contact-form-header">
+            <h4 id="form-header-title">Start a Conversation</h4>
+            <p id="form-header-sub">Inquiring as a founder. Switch above if needed.</p>
+          </div>
+
+          <form id="contact-form" action="mailto:jeff@jcventurecap.com" method="post" enctype="text/plain">
+
+            <div class="form-row form-row-split">
+              <div class="form-row">
+                <label for="first-name">First Name <span class="req">*</span></label>
+                <input type="text" id="first-name" name="first_name" placeholder="Jeffrey" required />
+              </div>
+              <div class="form-row">
+                <label for="last-name">Last Name <span class="req">*</span></label>
+                <input type="text" id="last-name" name="last_name" placeholder="Camp" required />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <label for="email">Email Address <span class="req">*</span></label>
+              <input type="email" id="email" name="email" placeholder="you@company.com" required />
+            </div>
+
+            <div class="form-row">
+              <label for="company">Company / Organization</label>
+              <input type="text" id="company" name="company" placeholder="Company name (optional)" />
+            </div>
+
+            <div class="form-row">
+              <label for="inquirer-type">I am a… <span class="req">*</span></label>
+              <div class="select-wrapper">
+                <select id="inquirer-type" name="inquirer_type" required>
+                  <option value="" disabled selected>Select the option that best describes you</option>
+                  <option value="founder">Founder / Entrepreneur</option>
+                  <option value="coinvestor">Co-Investor / Family Office</option>
+                  <option value="advisor">Advisor / Consultant</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <label for="message">Message <span class="req">*</span></label>
+              <textarea id="message" name="message" placeholder="Tell us about your company and the opportunity, or describe the type of co-investment access you are seeking. The more context you provide, the more useful our first conversation will be." required></textarea>
+            </div>
+
+            <p class="form-disclaimer">
+              By submitting this form you agree that your information will be reviewed by JC Venture
+              Capital and may be used to follow up on your inquiry. We do not share your information
+              with third parties. This form is not an investment application or commitment of any kind.
+            </p>
+
+            <button type="submit" class="btn btn-primary form-submit-btn">Send Your Message →</button>
+
+          </form>
+
+          <div class="form-success" id="form-success">
+            <div class="form-success-icon">✉️</div>
+            <h3>Message Sent</h3>
+            <p>Thank you for reaching out. Jeffrey or Joanne will review your message and respond within 2–3 business days. We look forward to the conversation.</p>
+          </div>
+        </div>
+
+      </div><!-- /contact-layout -->
+    </div><!-- /container -->
+  </section>
+
+  <!-- ══════ WHAT TO EXPECT ══════ -->
+  <section class="expect-section">
+    <div class="container">
+      <div class="section-header fade-in">
+        <span class="section-label">Our Process</span>
+        <h2 style="color:var(--white);">What Happens Next</h2>
+        <div class="divider"></div>
+        <p style="color:rgba(255,255,255,0.6);">We keep the process simple, direct, and respectful of your time.</p>
+      </div>
+      <div class="expect-grid">
+        <div class="expect-item fade-in">
+          <div class="expect-number">01</div>
+          <h4>Personal Review</h4>
+          <p>Jeffrey or Joanne reads every submission — no automated filters, no junior screener. Within 2–3 business days, you will receive a personal response.</p>
+        </div>
+        <div class="expect-item fade-in">
+          <div class="expect-number">02</div>
+          <h4>Initial Conversation</h4>
+          <p>If there is a potential fit, we schedule a 30-minute introductory call to understand your situation in more depth and determine whether there is a clear path forward together.</p>
+        </div>
+        <div class="expect-item fade-in">
+          <div class="expect-number">03</div>
+          <h4>Diligence or Introduction</h4>
+          <p>For founders, we conduct institutional-grade diligence before any commitment. For co-investors, we provide full deal materials including the investment memo and our independent analysis.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════ FOOTER ══════ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="nav-logo" style="margin-bottom:16px;">
+            <div class="nav-logo-mark"><span>JC</span></div>
+            <div class="nav-logo-text">
+              <span class="nav-logo-name">JC Venture Capital</span>
+              <span class="nav-logo-sub">Miami · Family Office &amp; VC</span>
+            </div>
+          </div>
+          <p>Institutional-grade diligence, deal access, and strategic partnership for exceptional founders and sophisticated co-investors.</p>
+        </div>
+        <div class="footer-col">
+          <h5>Navigation</h5>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Jeffrey Camp</a></li>
+            <li><a href="insights.html">Insights</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Connect</h5>
+          <ul>
+            <li><a href="contact.html">For Founders</a></li>
+            <li><a href="contact.html">For Co-Investors</a></li>
+            <li><a href="#" id="linkedin-link-footer">LinkedIn ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copyright">© 2026 JC Venture Capital. All rights reserved.</p>
+        <p class="footer-disclaimer">JC Venture Capital is a private investment firm. Nothing on this website constitutes investment advice or an offer to invest.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const header = document.getElementById('site-header');
+    window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 20));
+    const toggle = document.getElementById('nav-toggle');
+    const navLinks = document.getElementById('nav-links');
+    toggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Pathway selection
+    function selectPathway(type) {
+      const founderCard = document.getElementById('pathway-founder');
+      const coinvestorCard = document.getElementById('pathway-coinvestor');
+      const headerTitle = document.getElementById('form-header-title');
+      const headerSub = document.getElementById('form-header-sub');
+      const dropdown = document.getElementById('inquirer-type');
+
+      if (type === 'founder') {
+        founderCard.classList.add('active');
+        coinvestorCard.classList.remove('active');
+        headerTitle.textContent = 'Founders: Start a Conversation';
+        headerSub.textContent = 'Tell us about what you're building and where you are in your journey.';
+        dropdown.value = 'founder';
+      } else {
+        coinvestorCard.classList.add('active');
+        founderCard.classList.remove('active');
+        headerTitle.textContent = 'Co-Investors: Access Deal Flow';
+        headerSub.textContent = 'Tell us about your investment mandate and the type of opportunities you're seeking.';
+        dropdown.value = 'coinvestor';
+      }
+    }
+
+    // Form submit
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      document.getElementById('contact-form').style.display = 'none';
+      document.getElementById('form-success').style.display = 'block';
+    });
+  </script>
+
+</body>
+</html>
