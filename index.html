@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JC Venture Capital — Miami-Based Family Office &amp; Private VC</title>
+  <meta name="description" content="JC Venture Capital is a Miami-based family office and private venture capital firm founded by Jeffrey Camp, CFA — providing institutional-grade diligence, deal access, and strategic partnership to exceptional founders and sophisticated co-investors." />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── HOME-SPECIFIC STYLES ── */
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding-top: 72px;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 80% 40%, rgba(197,162,77,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse at 20% 70%, rgba(197,162,77,0.04) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    /* Subtle geometric pattern */
+    .hero::after {
+      content: '';
+      position: absolute;
+      right: -120px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 600px;
+      height: 600px;
+      border: 1px solid rgba(197,162,77,0.08);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      padding: 80px 0;
+    }
+
+    .hero-content {}
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 28px;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .hero h1 {
+      color: var(--white);
+      font-size: clamp(2.6rem, 4.5vw, 4rem);
+      font-weight: 400;
+      line-height: 1.15;
+      margin-bottom: 28px;
+      letter-spacing: -0.01em;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: rgba(255,255,255,0.75);
+    }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.75;
+      max-width: 520px;
+      margin-bottom: 48px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    /* Hero right panel — Why JCVC */
+    .hero-panel {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(197,162,77,0.15);
+      border-radius: var(--radius);
+      padding: 48px 40px;
+      backdrop-filter: blur(4px);
+    }
+
+    .hero-panel-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 32px;
+      display: block;
+    }
+
+    .hero-pillars {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .hero-pillar {
+      padding: 24px 0;
+      border-bottom: 1px solid rgba(197,162,77,0.12);
+    }
+
+    .hero-pillar:last-child { border-bottom: none; padding-bottom: 0; }
+    .hero-pillar:first-child { padding-top: 0; }
+
+    .hero-pillar-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .hero-pillar-title::before {
+      content: '';
+      display: block;
+      width: 20px;
+      height: 1px;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .hero-pillar-text {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.65;
+      padding-left: 30px;
+    }
+
+    /* Scroll indicator */
+    .scroll-hint {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      opacity: 0.4;
+      animation: scrollBounce 2.5s ease infinite;
+    }
+
+    .scroll-hint span {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--white);
+    }
+
+    .scroll-arrow {
+      width: 1px;
+      height: 32px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+    }
+
+    @keyframes scrollBounce {
+      0%, 100% { opacity: 0.4; transform: translateX(-50%) translateY(0); }
+      50% { opacity: 0.6; transform: translateX(-50%) translateY(4px); }
+    }
+
+    /* ── Investment Focus ── */
+    .focus-section { background: var(--cream); }
+
+    .focus-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 40px 36px;
+      box-shadow: var(--shadow-sm);
+      border-top: 3px solid transparent;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .focus-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+
+    .focus-card:hover::before { transform: scaleX(1); }
+    .focus-card:hover { box-shadow: var(--shadow-md); transform: translateY(-4px); }
+
+    .focus-icon {
+      width: 56px;
+      height: 56px;
+      background: rgba(26,42,74,0.06);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      font-size: 1.4rem;
+    }
+
+    .focus-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 12px;
+      color: var(--navy);
+    }
+
+    .focus-card p { font-size: 0.9rem; color: var(--text-light); line-height: 1.7; }
+
+    /* ── Insights Section ── */
+    .insights-section { background: var(--white); }
+
+    .insight-card {
+      background: var(--cream);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .insight-card:hover { box-shadow: var(--shadow-md); transform: translateY(-4px); }
+
+    .insight-card-image {
+      height: 180px;
+      background: var(--navy);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .insight-card-image-placeholder {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, var(--navy) 0%, #2a3f6f 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .insight-card-image-placeholder::after {
+      content: attr(data-icon);
+      font-size: 2.4rem;
+      opacity: 0.2;
+    }
+
+    .insight-category {
+      position: absolute;
+      bottom: 16px;
+      left: 20px;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--white);
+      background: var(--gold);
+      padding: 4px 12px;
+      border-radius: 100px;
+    }
+
+    .insight-card-body { padding: 28px; }
+
+    .insight-date {
+      font-size: 0.75rem;
+      color: var(--text-light);
+      letter-spacing: 0.05em;
+      margin-bottom: 10px;
+    }
+
+    .insight-card-body h3 {
+      font-size: 1.2rem;
+      line-height: 1.35;
+      margin-bottom: 12px;
+      color: var(--navy);
+    }
+
+    .insight-card-body h3 a {
+      color: var(--navy);
+      transition: color var(--transition);
+    }
+    .insight-card-body h3 a:hover { color: var(--gold); }
+
+    .insight-card-body p { font-size: 0.88rem; color: var(--text-light); }
+
+    .insight-read-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-top: 16px;
+      transition: gap var(--transition);
+    }
+
+    .insight-read-more:hover { gap: 10px; color: var(--navy); }
+
+    /* ── Bio Teaser ── */
+    .bio-section { background: var(--navy); overflow: hidden; }
+
+    .bio-inner {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 96px;
+      align-items: center;
+    }
+
+    .bio-image-wrap {
+      position: relative;
+    }
+
+    .bio-image-placeholder {
+      width: 100%;
+      aspect-ratio: 3/4;
+      max-height: 480px;
+      background: linear-gradient(160deg, rgba(197,162,77,0.15) 0%, rgba(255,255,255,0.03) 100%);
+      border: 1px solid rgba(197,162,77,0.15);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .bio-image-placeholder svg { opacity: 0.15; }
+
+    .bio-image-note {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.3);
+      letter-spacing: 0.1em;
+      text-align: center;
+    }
+
+    .bio-gold-bar {
+      position: absolute;
+      left: -24px;
+      top: 48px;
+      width: 4px;
+      height: 80px;
+      background: var(--gold);
+    }
+
+    .bio-content .section-label { color: var(--gold); }
+
+    .bio-content h2 {
+      color: var(--white);
+      margin-bottom: 24px;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+    }
+
+    .bio-content p { color: rgba(255,255,255,0.6); font-size: 0.98rem; line-height: 1.8; }
+
+    .bio-credentials {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 32px 0;
+    }
+
+    .credential-tag {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid rgba(197,162,77,0.3);
+      padding: 7px 16px;
+      border-radius: 100px;
+    }
+
+    /* ── Quote Banner ── */
+    .quote-section {
+      background: var(--cream);
+      padding: 80px 0;
+      text-align: center;
+    }
+
+    .quote-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-style: italic;
+      color: var(--navy);
+      font-weight: 400;
+      max-width: 800px;
+      margin: 0 auto 20px;
+      line-height: 1.5;
+    }
+
+    .quote-attr {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .quote-mark {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 6rem;
+      line-height: 0.5;
+      color: var(--gold);
+      opacity: 0.25;
+      display: block;
+      margin-bottom: 16px;
+    }
+
+    /* ── Responsive adjustments ── */
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+      .hero-panel { display: none; }
+      .bio-inner { grid-template-columns: 1fr; gap: 48px; }
+      .bio-image-wrap { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════ NAVIGATION ══════ -->
+  <header class="site-header" id="site-header">
+    <div class="container">
+      <nav class="nav-inner">
+        <a href="index.html" class="nav-logo" aria-label="JC Venture Capital Home">
+          <div class="nav-logo-mark"><span>JC</span></div>
+          <div class="nav-logo-text">
+            <span class="nav-logo-name">JC Venture Capital</span>
+            <span class="nav-logo-sub">Miami · Family Office &amp; VC</span>
+          </div>
+        </a>
+        <ul class="nav-links" id="nav-links">
+          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="insights.html">Insights</a></li>
+        </ul>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+          <span></span><span></span><span></span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ══════ HERO ══════ -->
+  <section class="hero" id="hero">
+    <div class="container">
+      <div class="hero-inner">
+
+        <!-- Left: Copy -->
+        <div class="hero-content fade-in">
+          <span class="hero-eyebrow">Miami · Family Office &amp; Venture Capital</span>
+          <h1>Partnering with <em>visionary founders</em> building the future</h1>
+          <p class="hero-desc">
+            JCVC delivers institutional-grade diligence, curated deal access, and board-level
+            operational support to exceptional founders and sophisticated co-investors.
+          </p>
+          <div class="hero-actions">
+            <a href="about.html" class="btn btn-primary">Our Approach</a>
+          </div>
+        </div>
+
+        <!-- Right: Why JCVC panel -->
+        <div class="hero-panel fade-in">
+          <span class="hero-panel-label">Why JCVC</span>
+          <div class="hero-pillars">
+
+            <div class="hero-pillar">
+              <div class="hero-pillar-title">Institutional Rigor</div>
+              <p class="hero-pillar-text">Three decades of Wall Street discipline — from #1-ranked sell-side research to global hedge fund management — applied to every private market investment we make.</p>
+            </div>
+
+            <div class="hero-pillar">
+              <div class="hero-pillar-title">Operator-Level Partnership</div>
+              <p class="hero-pillar-text">We don't just write checks. We invest where we can add value — bringing a 30-year global network built across four continents, board-level governance experience, and hands-on operational expertise to every company we back.</p>
+            </div>
+
+            <div class="hero-pillar">
+              <div class="hero-pillar-title">Selective Access</div>
+              <p class="hero-pillar-text">A 30-year global network opens doors to deal flow that conventional channels cannot. We invest alongside the best — and bring those relationships to every founder and co-investor we partner with.</p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="scroll-hint">
+      <span>Scroll</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- ══════ INVESTMENT FOCUS ══════ -->
+  <section class="focus-section section" id="investment-focus">
+    <div class="container">
+      <div class="section-header fade-in">
+        <span class="section-label">Where We Invest</span>
+        <h2>From the Internet to AI — We've Been Here Before</h2>
+        <div class="divider"></div>
+        <p>I began my career as a technology investor in Asia in the early 1990s, covering telecommunications — the infrastructure story of the era — and identifying mobile communications as its most consequential emerging frontier. What I see in AI today is the same pattern: a generational infrastructure cycle that will reshape every industry, every asset class, and every market on earth. AI is to Gen-Z what the Internet was to Gen-X. I've lived both.</p>
+      </div>
+
+      <div class="grid-3">
+
+        <div class="focus-card fade-in">
+          <div class="focus-icon">🤖</div>
+          <h3>Technology &amp; Innovation</h3>
+          <p>From early-stage venture to public markets — we invest across the full technology spectrum, with a particular focus on AI, digital health, and the infrastructure layer being built beneath them.</p>
+        </div>
+
+        <div class="focus-card fade-in">
+          <div class="focus-icon">🌐</div>
+          <h3>Global Public &amp; Private Markets</h3>
+          <p>Three decades across Tokyo, Hong Kong, London, New York, and Miami have shaped an investment perspective that is genuinely international — in both deal flow and market insight.</p>
+        </div>
+
+        <div class="focus-card fade-in">
+          <div class="focus-icon">🏙️</div>
+          <h3>Real Assets</h3>
+          <p>Strategic real estate positions that complement our technology thesis — selected with the same institutional discipline we bring to every investment.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════ FEATURED INSIGHTS ══════ -->
+  <section class="insights-section section" id="featured-insights">
+    <div class="container">
+      <div class="section-header fade-in" style="display:flex; justify-content:space-between; align-items:flex-end; max-width:100%;">
+        <div>
+          <span class="section-label">From the Desk of Jeffrey Camp, CFA</span>
+          <h2>Featured Insights</h2>
+          <div class="divider"></div>
+        </div>
+        <a href="insights.html" class="btn btn-outline-navy" style="white-space:nowrap; align-self:flex-start; margin-top:16px;">View All Insights</a>
+      </div>
+
+      <div class="grid-3">
+
+        <article class="insight-card fade-in">
+          <div class="insight-card-image">
+            <div class="insight-card-image-placeholder" data-icon="📊"></div>
+            <span class="insight-category">Founder Insights</span>
+          </div>
+          <div class="insight-card-body">
+            <div class="insight-date">March 2026</div>
+            <h3><a href="insights.html">Harnessing the Power of Data: How Startups Turn Numbers Into Competitive Advantage</a></h3>
+            <p>In the dynamic world of startups, the ability to collect, comprehend, and utilize data can give you a decisive competitive edge — from sales and operations to marketing and culture.</p>
+            <a href="insights.html" class="insight-read-more">Read more →</a>
+          </div>
+        </article>
+
+        <article class="insight-card fade-in">
+          <div class="insight-card-image">
+            <div class="insight-card-image-placeholder" data-icon="🚀"></div>
+            <span class="insight-category">Founder Insights</span>
+          </div>
+          <div class="insight-card-body">
+            <div class="insight-date">February 2026</div>
+            <h3><a href="insights.html">Times of Crisis Separate the Leaders from Everyone Else</a></h3>
+            <p>Eight principles drawn from West Point graduates, Army Rangers, and elite entrepreneurs that define what separates exceptional leaders when the stakes are highest.</p>
+            <a href="insights.html" class="insight-read-more">Read more →</a>
+          </div>
+        </article>
+
+        <article class="insight-card fade-in">
+          <div class="insight-card-image">
+            <div class="insight-card-image-placeholder" data-icon="🤝"></div>
+            <span class="insight-category">Co-Investor Perspectives</span>
+          </div>
+          <div class="insight-card-body">
+            <div class="insight-date">January 2026</div>
+            <h3><a href="insights.html">The Art of Storytelling for Start-ups: Turning Vision into Capital</a></h3>
+            <p>From Kavak to Buser — why the founders who raise capital fastest are not the ones with the best decks, but the ones who have mastered the craft of authentic narrative.</p>
+            <a href="insights.html" class="insight-read-more">Read more →</a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════ BIO TEASER ══════ -->
+  <section class="bio-section section" id="about-teaser">
+    <div class="container">
+      <div class="bio-inner">
+
+        <div class="bio-image-wrap fade-in">
+          <div class="bio-gold-bar"></div>
+          <div class="bio-image-placeholder">
+            <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="40" cy="32" r="18" stroke="white" stroke-width="2"/>
+              <path d="M8 72c0-17.673 14.327-32 32-32s32 14.327 32 32" stroke="white" stroke-width="2" fill="none"/>
+            </svg>
+            <span class="bio-image-note">Headshot — Pending from Jeffrey</span>
+          </div>
+        </div>
+
+        <div class="bio-content fade-in">
+          <span class="section-label">Meet the Founder</span>
+          <h2>Jeffrey Camp, CFA</h2>
+          <div class="bio-credentials">
+            <span class="credential-tag">Morgan Stanley MD</span>
+            <span class="credential-tag">CFA Charterholder</span>
+            <span class="credential-tag">30+ Years Experience</span>
+            <span class="credential-tag">University of Michigan</span>
+          </div>
+          <p>
+            At 22, I was living in Tokyo covering Japan's emerging mobile telecoms stocks — learning to read markets in a language I came to master, in a country building infrastructure for a mobile market that didn't exist yet. That instinct for being early has defined everything since.
+          </p>
+          <p style="margin-top:16px;">
+            Three decades later, the pattern is the same. I've sat at the table through the dot-com boom, built and run hedge funds in London and New York, backed AI infrastructure companies alongside Nvidia and Oracle, and watched a company I seed-funded grow from zero to $45M in recurring revenue. Every cycle, every market, every asset class — always looking for what comes next before the consensus finds it.
+          </p>
+          <p style="margin-top:16px;">
+            JC Venture Capital is where that experience lives today — a platform for principal investment across venture, public markets, and real estate, and a community for the sophisticated co-investors and founders who want to be in the room where it happens.
+          </p>
+          <a href="about.html" class="btn btn-primary" style="margin-top:36px;">Full Biography</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════ QUOTE BANNER ══════ -->
+  <section class="quote-section" id="quote">
+    <div class="container">
+      <span class="quote-mark">"</span>
+      <p class="quote-text">
+        Luck is what happens when preparation meets opportunity.
+      </p>
+      <span class="quote-attr">— Seneca</span>
+    </div>
+  </section>
+
+  <!-- ══════ FOOTER ══════ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+
+        <div class="footer-brand">
+          <div class="nav-logo" style="margin-bottom:16px;">
+            <div class="nav-logo-mark"><span>JC</span></div>
+            <div class="nav-logo-text">
+              <span class="nav-logo-name">JC Venture Capital</span>
+              <span class="nav-logo-sub">Miami · Family Office &amp; VC</span>
+            </div>
+          </div>
+          <p>Institutional-grade diligence, deal access, and strategic partnership for exceptional founders and sophisticated co-investors.</p>
+        </div>
+
+        <div class="footer-col">
+          <h5>Navigation</h5>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Jeffrey Camp</a></li>
+            <li><a href="insights.html">Insights</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Connect</h5>
+          <ul>
+            <li><a href="#" id="linkedin-link">LinkedIn ↗</a></li>
+          </ul>
+          <div class="footer-social" style="margin-top:20px;">
+            <a href="#" id="linkedin-icon" aria-label="LinkedIn">in</a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copyright">© 2026 JC Venture Capital. All rights reserved.</p>
+        <p class="footer-disclaimer">
+          JC Venture Capital is a private investment firm. Nothing on this website constitutes
+          investment advice or an offer to invest.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Sticky nav shadow on scroll
+    const header = document.getElementById('site-header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 20);
+    });
+
+    // Mobile nav toggle
+    const toggle = document.getElementById('nav-toggle');
+    const navLinks = document.getElementById('nav-links');
+    toggle.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+
+    // Intersection Observer for fade-in
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
